@@ -1,99 +1,86 @@
 # Python Tool for Data Normalization, Matching, and Classification
 
-This project is a Python-based data analysis tool that performs the following tasks:
-
-1. **Reads and imports train, ideal, and test datasets from CSV files into an SQLite database.**
-2. **Normalizes the datasets and finds the best matching ideal function for each train function.**
-3. **Plots comparison graphs for train and ideal functions.**
-4. **Classifies test data points based on the closest ideal function.**
-5. **Stores the results back into the database.**
-6. **Includes unit tests to validate core functionalities.**
+A Python-based data analysis tool that automates the normalization, matching, classification, and visualization of datasets, integrated with SQLite for efficient data management.
 
 ---
 
-## 📂 Project Structure
+## Table of Contents
 
-.
-├── datasets/
-│ ├── train.csv
-│ ├── ideal.csv
-│ └── test.csv
-├── src/
-│ ├── main.py # Contains DataProcessorBase and DerivedDataProcessor classes
-├── tests/
-│ ├── test_main.py # Unit tests using unittest
-├── database.db # SQLite database file
-├── plot_1.png # Comparison plot (e.g., Y1)
-├── plot_2.png # Comparison plot (e.g., Y11)
-├── plot_4.png # Comparison plot (e.g., Y31)
-└── README.md # This file
+- [Overview](#overview)  
+- [Features](#features)  
+- [How It Works](#how-it-works)  
+- [Installation](#installation)  
+- [Usage](#usage)  
+- [Testing](#testing)  
+- [Future Improvements](#future-improvements)  
+- [Author](#author)  
 
+---
 
-## 🚀 How It Works
+## Overview
 
-### Step 1: Load Data into SQLite
+This tool reads train, ideal, and test datasets from CSV files, normalizes the data, matches train functions with ideal functions based on minimum error, classifies test data points, visualizes the results, and stores everything in an SQLite database.
 
-CSV files from the `datasets/` folder are loaded into the `database.db` SQLite database using SQLAlchemy.
+---
 
-df.to_sql(table_name, engine, index=False, if_exists="replace")
+## Features
 
-Step 2: Normalize Data
-Data is normalized using Z-score normalization (zero mean, unit variance):
-normalized_data = (data - data.mean()) / data.std()
+- Load CSV datasets into SQLite using SQLAlchemy  
+- Z-score normalization of datasets  
+- Match train functions to ideal functions by minimizing sum of squared errors  
+- Classify test data based on closest ideal function  
+- Visualization of train vs ideal functions using Matplotlib  
+- Store classification results back into the database  
+- Unit tests for core functionality  
 
-Step 3: Match Train Functions to Ideal Functions
-The ideal function with the minimum sum of squared errors (SSE) is selected for each train function.
+---
 
-Step 4: Plot Data
-Plots are generated comparing each normalized train function to its closest ideal match using Matplotlib.
+## How It Works
 
-Step 5: Classify Test Data
-Each test data point is classified to the closest ideal function by minimum absolute Y-difference.
+1. **Load Data**  
+   Import CSV files into SQLite tables.
 
-Step 6: Save Results
-The results are saved into the database in a table named result.
+2. **Normalize Data**  
+   Apply Z-score normalization for standardized comparison.
 
-🧪 Running Tests
-Tests are located in the tests/ folder. You can run them with:
+3. **Match Functions**  
+   Identify the ideal function best matching each train function by minimizing squared error.
 
-python -m unittest tests/test_main.py
-The tests cover:
+4. **Plot Data**  
+   Generate comparison plots of train and ideal functions.
 
-Data normalization
-Squared error calculations
-Best-fit function identification
+5. **Classify Test Data**  
+   Assign test points to the closest ideal function based on minimal Y-value difference.
 
-📦 Requirements
-Python 3.7+
-pandas
-numpy
-matplotlib
-SQLAlchemy
+6. **Save Results**  
+   Persist classification results in the SQLite `result` table.
 
-Install dependencies using:
-pip install -r requirements.txt
-(You may need to create the requirements.txt with the above libraries.)
+---
 
-🏁 Running the Project
-From the root directory:
+## Installation
 
+1. Clone the repository:
+    ```bash
+    git clone <repository_url>
+    cd <repository_folder>
+    ```
+
+2. Create and activate a virtual environment (optional but recommended):
+    ```bash
+    python -m venv venv
+    source venv/bin/activate  # On Windows: venv\Scripts\activate
+    ```
+
+3. Install dependencies:
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+---
+
+## Usage
+
+Run the main script to execute the full pipeline:
+
+```bash
 python src/main.py
-This will:
-
-Normalize data
-Match train to ideal functions
-Classify test data
-Save results to SQLite
-Display plots
-
-🛠 Future Improvements
-Add GUI using Tkinter or Streamlit
-
-Export results to CSV
-Handle edge cases in data classification
-Improve performance on large datasets
-
-👨‍💻 Author
-Preveenkumar Muthukumar
-Project for IU Germany – MSc Computer Science course on Python Programming
-
