@@ -28,11 +28,6 @@ This project is a Python-based data analysis tool that performs the following ta
 ├── plot_4.png # Comparison plot (e.g., Y31)
 └── README.md # This file
 
-yaml
-Copy
-Edit
-
----
 
 ## 🚀 How It Works
 
