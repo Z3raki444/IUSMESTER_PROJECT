@@ -84,3 +84,18 @@ Run the main script to execute the full pipeline:
 
 ```bash
 python src/main.py
+
+## Reproduce the pipeline from the CSV data
+
+From the repository root:
+
+```bash
+python -m pip install -r requirements.txt
+python src/convert.py
+python -m unittest src.unit -v
+python src/main.py
+```
+
+`src/convert.py` imports the three CSV files from `datasets/` into an SQLite database at `database.db`; `src/main.py` analyzes the SQL tables and replaces the `result` table. A desktop display is required to view its interactive Matplotlib plots.
+
+**Important:** Import and processing overwrite some SQLite tables. Back up `database.db` before rerunning if it contains results you want to retain. The code is a learning exercise; review the normalization and matching assumptions before adapting it to other datasets.
